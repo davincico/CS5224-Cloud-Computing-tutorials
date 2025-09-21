@@ -1,10 +1,8 @@
 
 
 ### Setup
-
+Within Project directory mkdir test
 ``` 
-# Within Project directory
-mkdir test
 cd test
 npm init -y
 npm install express --save
@@ -26,8 +24,8 @@ node index.js # to start
 ```
 
 To build docker image for test app
+- Write your Dockerfile and .dockerignore
 ```
-#Write your Dockerfile and .dockerignore
 docker build . -t <username>/test-web-app
 
 docker image ls
