@@ -17,3 +17,20 @@ Steps:
 2. Upload csv to S3 ```aws-emr-demo-spark```
 3. Change cluster logs to your S3 with /logs appended
 4. SSH key to cluster ```emr1.pem```
+
+#### Running Steps
+```python
+aws sts get-caller-identity
+
+aws emr list-clusters --cluster-states WAITING	
+
+aws emr add-steps \
+--cluster-id <myClusterId> \
+--steps Type=Spark,Name="<My Spark Application>",ActionOnFailure=CONTINUE,Args=[<s3://amzn-s3-demo-bucket/health_violations.py>,--data_source,<s3://amzn-s3-demo-bucket/food_establishment_data.csv>,--output_uri,<s3://amzn-s3-demo-bucket/MyOutputFolder>]							
+# Returns step ID
+
+# Query step ID to see status "COMPLETE"
+aws emr describe-step --cluster-id <myClusterId> --step-id <s-1XXXXXXXXXXA>							
+
+```
+Output of the spark step will be in the S3 bucket /output folder.
