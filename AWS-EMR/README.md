@@ -18,7 +18,23 @@ Steps:
 3. Change cluster logs to your S3 with /logs appended
 4. SSH key to cluster ```emr1.pem```
 
-#### Running Steps
+### Using the EMR Cluster
+#### 1. AWS Console
+1. Go to EMR cluster > steps > add steps
+2. Choose Spark application + cluster mode
+3. Application location select your script in the S3
+4. Spark-submit options EMPTY
+5. Arguments field:
+   1. ```--data_source s3://amzn-s3-demo-bucket/food_establishment_data.csv``` 
+   2. ```--output_uri s3://amzn-s3-demo-bucket/myOutputFolder```
+
+After add step, wait for status to change from pending to running to completed (about 1 min)
+
+Check the S3 Bucket for output folder:
+- _SUCCESS file (ignore)
+- results csv
+
+#### 2. AWS CLI
 ```python
 aws sts get-caller-identity
 
